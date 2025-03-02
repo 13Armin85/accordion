@@ -1,17 +1,19 @@
-var acc = document.getElementsByClassName("accordion");
-var i;
+document.addEventListener("DOMContentLoaded", function () {
+    const headers = document.querySelectorAll(".accordion-header");
 
-for (i = 0; i < acc.length; i++) {
-    acc[i].addEventListener("click", function() {
+    headers.forEach((header) => {
+        header.addEventListener("click", function () {
+            const currentlyActive = document.querySelector(
+                ".accordion-content.active"
+            );
 
-        this.classList.toggle("active");
+            // بستن پنل قبلی اگر باز بود
+            if (currentlyActive && currentlyActive !== this.nextElementSibling) {
+                currentlyActive.classList.remove("active");
+            }
 
-
-        var panel = this.nextElementSibling;
-        if (panel.style.display === "block") {
-            panel.style.display = "none";
-        } else {
-            panel.style.display = "block";
-        }
+            // تغییر وضعیت پنل کلیک‌شده
+            this.nextElementSibling.classList.toggle("active");
+        });
     });
-}
+});
